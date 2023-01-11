@@ -5,7 +5,7 @@ import fs from "fs";
 class Image {
   constructor(public filename: string) {
     if (!fs.existsSync(this.getOriginalFullPath()))
-        throw new Error(`File: ${this.filename} does not exist.`);
+      throw new Error(`File: ${this.filename} does not exist.`);
   }
 
   getOriginalFullPath(): string {

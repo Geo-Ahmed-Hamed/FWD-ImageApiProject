@@ -20,8 +20,8 @@ images.get("/", async (req: Request, res: Response) => {
 
     res.sendFile(newFullPath);
   } catch (error) {
-    let message = 'Unknown Error'
-    if (error instanceof Error) message = error.message
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
     res.send(message);
   }
 });
