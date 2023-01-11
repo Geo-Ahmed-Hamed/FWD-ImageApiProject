@@ -7,17 +7,20 @@
     "start:dev": "npx nodemon",
     "prettier": "npx prettier --write .",
     "build": "npx tsc",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.15",
+    "@types/jasmine": "^4.3.1",
     "@types/node": "^18.11.18",
     "@types/sharp": "^0.31.1",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
+    "jasmine": "^4.5.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.2",
     "ts-node": "^10.9.1",
@@ -25,6 +28,7 @@
   },
   "dependencies": {
     "express": "^4.18.2",
+    "jasmine-spec-reporter": "^7.0.0",
     "sharp": "^0.31.3"
   }
 }

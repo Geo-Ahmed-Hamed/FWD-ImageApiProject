@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
-import fs from "fs";
-import path from "path";
-import sharp from "sharp";
+import Image from "../../utilities/helpers/image";
+import Cache from "../../utilities/middlewares/cache/cache";
 
 const images = express.Router();
 
@@ -11,35 +10,19 @@ images.get("/", async (req: Request, res: Response) => {
     const width = req.query.width as unknown as number;
     const height = req.query.height as unknown as number;
 
-    const fullPath = path.join(
-      __dirname,
-      "..",
-      "..",
-      "utilities",
-      "images",
-      "original",
-      `${filename}.jpg`
-    );
+    const image = new Image(filename);
 
-    if (fs.existsSync(fullPath)) {
-      const newFullPath = path.join(
-        __dirname,
-        "..",
-        "..",
-        "utilities",
-        "images",
-        "generated",
-        `${filename}-${width}-${height}.jpg`
-      );
+    const newFullPath = image.getGeneratedFullPath(width, height);
 
-      await sharp(fullPath).resize(+width, +height).toFile(newFullPath);
+    await image.resize(+width, +height).toFile(newFullPath);
 
-      res.sendFile(newFullPath);
-    } else {
-      res.send(`Error: File: ${filename} does not exist.`);
-    }
+    Cache.add(filename, width.toString(), height.toString());
+
+    res.sendFile(newFullPath);
   } catch (error) {
-    res.send(error);
+    let message = 'Unknown Error'
+    if (error instanceof Error) message = error.message
+    res.send(message);
   }
 });
 
