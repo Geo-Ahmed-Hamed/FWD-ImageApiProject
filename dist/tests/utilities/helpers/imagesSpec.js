@@ -6,6 +6,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 var image_1 = __importDefault(require("../../../utilities/helpers/image"));
+var path_1 = __importDefault(require("path"));
 describe("Image Tests", function () {
   it("Expect Not Throw Error if Image File Exist", function () {
     expect(function () {
@@ -19,12 +20,14 @@ describe("Image Tests", function () {
   });
   it("Expect getOriginalFullPath Return Right Path", function () {
     var image = new image_1.default("egypt");
-    expect(image.getOriginalFullPath()).toContain("original\\egypt.jpg");
+    expect(image.getOriginalFullPath()).toContain(
+      path_1.default.join("original", "egypt.jpg")
+    );
   });
   it("Expect getGeneratedFullPath Return Right Generated Path", function () {
     var image = new image_1.default("egypt");
     expect(image.getGeneratedFullPath(100, 100)).toContain(
-      "generated\\egypt-100-100.jpg"
+      path_1.default.join("generated", "egypt-100-100.jpg")
     );
   });
   it("Expect Not Throw Error at Image Processing", function () {

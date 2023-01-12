@@ -13,13 +13,15 @@ describe("Image Tests", function () {
 
   it("Expect getOriginalFullPath Return Right Path", function () {
     const image = new Image("egypt");
-    expect(image.getOriginalFullPath()).toContain("original\\egypt.jpg");
+    expect(image.getOriginalFullPath()).toContain(
+      path.join("original", "egypt.jpg")
+    );
   });
 
   it("Expect getGeneratedFullPath Return Right Generated Path", function () {
     const image = new Image("egypt");
     expect(image.getGeneratedFullPath(100, 100)).toContain(
-      "generated\\egypt-100-100.jpg"
+      path.join("generated", "egypt-100-100.jpg")
     );
   });
 
