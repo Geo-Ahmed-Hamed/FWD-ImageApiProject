@@ -1,5 +1,6 @@
 import Image from "../../../utilities/helpers/image";
 import fs from "fs";
+import path from "path";
 
 describe("Image Tests", function () {
   it("Expect Not Throw Error if Image File Exist", function () {
@@ -13,7 +14,17 @@ describe("Image Tests", function () {
   it("Expect File Actually Exist", function () {
     new Image("egypt");
     const result = fs.existsSync(
-      "D:\\Knowledge\\Others\\Node\\ImageApiProject\\dist\\utilities\\images\\original\\egypt.jpg"
+      path.join(
+        __dirname,
+        "..",
+        "..",
+        "utilities",
+        "images",
+        "original",
+        "egypt.jpg"
+      )
+      .replace("\\test", "")
+      .replace("dists", "dist")
     );
     expect(result).toBe(true);
   });
@@ -21,14 +32,40 @@ describe("Image Tests", function () {
   it("Expect getOriginalFullPath Return Right Full Path", function () {
     const image = new Image("egypt");
     expect(image.getOriginalFullPath()).toBe(
-      "D:\\Knowledge\\Others\\Node\\ImageApiProject\\dist\\utilities\\images\\original\\egypt.jpg"
+      path.join(
+        __dirname,
+        "..",
+        "..",
+        "utilities",
+        "images",
+        "original",
+        "egypt.jpg"
+      )
+      .replace("\\test", "")
+      .replace("dists", "dist")
     );
   });
 
   it("Expect getGeneratedFullPath Return Right Generated Full Path", function () {
     const image = new Image("egypt");
     expect(image.getGeneratedFullPath(100, 100)).toBe(
-      "D:\\Knowledge\\Others\\Node\\ImageApiProject\\dist\\utilities\\images\\generated\\egypt-100-100.jpg"
+      path.join(
+        __dirname,
+        "..",
+        "..",
+        "utilities",
+        "images",
+        "generated",
+        "egypt-100-100.jpg"
+      )
+      .replace("\\test", "")
+      .replace("dists", "dist")
     );
   });
+
+  it("Expect Not Throw Error at Image Processing", function () {
+    const image = new Image("egypt");
+    expect(() => image.resize(100,100)).not.toThrow();
+  });
+
 });
